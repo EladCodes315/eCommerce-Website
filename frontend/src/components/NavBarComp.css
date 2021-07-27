@@ -1,0 +1,88 @@
+.navbar {
+	width: 100%;
+	height: 90px;
+	background-color: #171717;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1.5rem 1rem;
+	z-index: 50;
+}
+
+.navbar-logo h2 {
+	color: #f4f4f4;
+	font-size: 1.4rem;
+	cursor: pointer;
+}
+
+.navbar-links {
+	display: flex;
+	list-style: none;
+	align-items: center;
+	text-decoration: none;
+	color: #f4f4f4;
+	font-size: 1.2rem;
+}
+
+.navbar-links > span {
+	display: flex;
+	align-items: center;
+	margin-left: 8px;
+	width: 10px;
+	height: 10px;
+}
+
+.cart-link:hover {
+	opacity: 50%;
+}
+
+.cart-counter {
+	background: #ff0000;
+	color: #f4f4f4;
+	margin-left: 16px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 1rem;
+}
+
+.cartlogo {
+	padding-right: 15px;
+}
+
+.hamburger-menu {
+	width: 30px;
+	height: 30px;
+	display: none;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+}
+
+.hamburger-menu > div {
+	width: 100%;
+	height: 3px;
+	background: #f4f4f4;
+}
+
+.hamburger-menu:hover {
+	opacity: 50%;
+}
+
+@media (max-width: 960px) {
+	.navbar-links {
+		display: none;
+	}
+	.hamburger-menu {
+		display: flex;
+	}
+}
+
+@media (max-width: 500px) {
+	.navbar-logo h2 {
+		font-size: 1rem;
+	}
+}
