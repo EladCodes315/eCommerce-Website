@@ -1,0 +1,21 @@
+.homescreen {
+	max-width: 1300px;
+	margin: 1rem auto;
+}
+
+.homescreen-products {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 925px) {
+	.homescreen-products {
+		grid-template-columns: repeat(2, auto);
+	}
+}
+
+@media (max-width: 625px) {
+	.homescreen-products {
+		grid-template-columns: 1fr;
+	}
+}

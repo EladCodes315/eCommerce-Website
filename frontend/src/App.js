@@ -32,7 +32,7 @@ function App(){
 					{/* The HomeScreen */}
 					<Route exact path="/" component={HomeScreenComp} />
 					{/* The ProductScreen */}
-					<Route exact path="/product" component={ProductScreenComp} />
+					<Route exact path="/product/:id" component={ProductScreenComp} />
 					{/* The CartScreen */}
 					<Route exact path="/cart" component={CartScreenComp} />
 				</Switch>
