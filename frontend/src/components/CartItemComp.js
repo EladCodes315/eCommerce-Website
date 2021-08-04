@@ -4,24 +4,29 @@ import { Link } from 'react-router-dom';
 
 import './CartItemComp.css';
 
-const CartItemComp = () => {
+const CartItemComp = props => {
 	return (
 		<div className="cartitem">
 			<div className="cartitem-image">
-				<img src="https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg" alt="" />
+				<img src={props.item.imageUrl} alt="" />
 			</div>
-			<Link to={`/products/${111}`} className="cartitem-name">
-				<p>Product</p>
+			<Link to={`/products/${props.item.productId}`} className="cartitem-name">
+				<p>{props.item.name}</p>
 			</Link>
-			<p className="cartitem-price"> ₪300 </p>
-			<select className="cartitem-select">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
+			<p className="cartitem-price"> ₪{props.item.price * props.item.quantity} </p>
+			<select
+				className="cartitem-select"
+				value={props.item.quantity}
+				onChange={e => props.quantityChangeHandler(props.item.productId, e.target.value)}
+			>
+				{[ ...Array(props.item.countInStock).keys() ].map(x => (
+					<option key={x + 1} value={x + 1}>
+						{x + 1}
+					</option>
+				))}
 			</select>
 
-			<button className="cartitem-deletebtn">
+			<button className="cartitem-deletebtn" onClick={e => props.removeFromCartHandler(props.item.productId)}>
 				<i className="fas fa-trash" />
 			</button>
 		</div>

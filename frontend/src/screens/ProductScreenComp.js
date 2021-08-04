@@ -1,42 +1,77 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './ProductScreenComp.css';
 
-const ProductScreenComp = () => {
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getProductDetails } from '../redux/actions/productActions';
+import { addToCart } from '../redux/actions/cartActions';
+
+const ProductScreenComp = props => {
+	const [ quantity, setQuantity ] = useState(1);
+	const dispatch = useDispatch();
+
+	const productDetails = useSelector(state => state.getProductDetails);
+	const { loading, error, product } = productDetails;
+
+	useEffect(
+		() => {
+			dispatch(getProductDetails(props.match.params.id));
+		},
+		[ dispatch ]
+	);
+
+	const addToCartHandler = () => {
+		dispatch(addToCart(product._id, quantity));
+		props.history.push('/cart');
+	};
+
 	return (
 		<div className="productscreen">
-			<div className="productscreen-left">
-				<div className="left-image">
-					<img src="https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg" alt="" />
+			{loading ? (
+				<h2>Loading...</h2>
+			) : error ? (
+				console.log(error)
+			) : (
+				<div className="productscreen">
+					<div className="productscreen-left">
+						<div className="left-image">
+							<img src={product.imageUrl} alt={product.name} />
+						</div>
+						<div className="left-info">
+							<p className="left-name">{product.name}</p>
+							<p>₪{product.price}</p>
+							<p>Descripstion: {product.description}</p>
+						</div>
+					</div>
+					<div className="productscreen-right">
+						<div className="right-info">
+							<p>
+								Price: <span>₪{product.price * quantity}</span>
+							</p>
+							<p>
+								Status: <span> {product.countInStock > 0 ? 'In Stock!' : 'Out of Stock!'} </span>
+							</p>
+							<p>
+								Quantity:
+								<select value={quantity} onChange={e => setQuantity(e.target.value)}>
+									{[ ...Array(product.countInStock).keys() ].map(x => (
+										<option key={x + 1} value={x + 1}>
+											{x + 1}
+										</option>
+									))}
+								</select>
+							</p>
+							<p>
+								<button className="productscreen-addbtn" onClick={addToCartHandler}>
+									{' '}
+									Add To Cart{' '}
+								</button>
+							</p>
+						</div>
+					</div>
 				</div>
-				<div className="left-info">
-					<p className="left-name">Product</p>
-					<p>₪300</p>
-					<p>Descripstion: Consequat culpa sit veniam non laboris velit aute incididunt commodo nostrud velit irure laborum in.</p>
-				</div>
-			</div>
-			<div className="productscreen-right">
-				<div className="right-info">
-					<p>
-						Price: <span>$300</span>
-					</p>
-					<p>
-						Status: <span> In Stock! </span>
-					</p>
-					<p>
-						Quantity:
-						<select>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-						</select>
-					</p>
-					<p>
-						<button className="productscreen-addbtn"> Add To Cart </button>
-					</p>
-				</div>
-			</div>
+			)}
 		</div>
 	);
 };

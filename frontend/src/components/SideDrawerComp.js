@@ -1,5 +1,6 @@
 // React Hooks
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 // CSS
 import './SideDrawerComp.css';
@@ -9,6 +10,14 @@ const SideDrawerComp = props => {
 	if (props.show) {
 		sideDrawerClass.push('show');
 	}
+
+	const cart = useSelector(state => state.cart);
+	const { cartItems } = cart;
+
+	const getCartCount = () => {
+		return cartItems.reduce((cartCount, item) => Number(item.quantity) + cartCount, 0);
+	};
+
 	return (
 		<div className={sideDrawerClass.join(' ')}>
 			<ul className="sidedrawer-links" onClick={props.click}>
@@ -22,7 +31,7 @@ const SideDrawerComp = props => {
 							<i className="fas fa-shopping-cart" />
 						</div>
 						{/* Cart counter */}
-						<span className="sidedrawer-cart-counter">0</span>
+						<span className="sidedrawer-cart-counter">{getCartCount()}</span>
 					</Link>
 				</li>
 			</ul>
