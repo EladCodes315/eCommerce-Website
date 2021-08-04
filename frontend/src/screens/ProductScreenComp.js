@@ -33,7 +33,7 @@ const ProductScreenComp = () => {
 						</select>
 					</p>
 					<p>
-						<button type="button"> Add To Cart </button>
+						<button className="productscreen-addbtn"> Add To Cart </button>
 					</p>
 				</div>
 			</div>
