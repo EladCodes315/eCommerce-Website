@@ -21,7 +21,7 @@ An eCommerce website where everyone can shop for anything!
 ---
 ## How To Use
 1. Clone the repository.
-2. Run the command: 'npm run dev' in the terminal from the main directoy.
+2. Run the command: 'npm run dev' in the terminal from the main directory.
 #### Installation
 1. Nodejs - (https://nodejs.org/en/download/current/)
 2. MongoDB Community server - (https://www.mongodb.com/try/download/community)
