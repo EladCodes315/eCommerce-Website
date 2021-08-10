@@ -24,6 +24,19 @@
 	font-size: 1.2rem;
 }
 
+.navbar-links > li {
+	margin: 0 5px;
+}
+
+.navbar-links > li > a {
+	text-decoration: none;
+	color: #f4f4f4;
+}
+
+.navbar-links > li > a:hover {
+	opacity: 0.5;
+}
+
 .navbar-links > span {
 	display: flex;
 	align-items: center;
@@ -32,8 +45,8 @@
 	height: 10px;
 }
 
-.cart-link:hover {
-	opacity: 50%;
+.cart-link {
+	margin-left: 8px;
 }
 
 .cart-counter {
@@ -50,6 +63,21 @@
 
 .cartlogo {
 	padding-right: 15px;
+}
+
+.navbar-btns {
+	background-color: transparent;
+	border: 0;
+	color: #f4f4f4;
+	cursor: pointer;
+}
+
+.fas fa-user-circle:hover {
+	opacity: 0.5;
+}
+
+.navbar-btns:hover {
+	opacity: 0.5;
 }
 
 .hamburger-menu {

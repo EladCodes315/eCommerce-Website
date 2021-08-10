@@ -2,23 +2,23 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { cartReducer } from './reducers/cartReducer';
 import { getProductsReducer } from './reducers/productReducers';
 import { getProductDetailsReducer } from './reducers/productReducers';
+import { getLoggedUserReducer } from './reducers/accountReducers';
 
 const reducer = combineReducers({
-	cart: cartReducer,
 	getProducts: getProductsReducer,
-	getProductDetails: getProductDetailsReducer
+	getProductDetails: getProductDetailsReducer,
+	getLoggedUser: getLoggedUserReducer
 });
 
 const middleware = [ thunk ];
 
-const cartFromLocalStorage = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+const userFromLocalStorage = localStorage.getItem('loggedUser') ? JSON.parse(localStorage.getItem('loggedUser')) : {};
 
 const initialState = {
-	cart: {
-		cartItems: cartFromLocalStorage
+	getLoggedUser: {
+		loggedUser: userFromLocalStorage
 	}
 };
 

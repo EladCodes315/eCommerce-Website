@@ -5,25 +5,32 @@ import './ProductScreenComp.css';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getProductDetails } from '../redux/actions/productActions';
-import { addToCart } from '../redux/actions/cartActions';
+import { addToCart } from '../redux/actions/accountActions';
 
-const ProductScreenComp = props => {
+const ProductScreenComp = ({ match, history }) => {
 	const [ quantity, setQuantity ] = useState(1);
 	const dispatch = useDispatch();
 
 	const productDetails = useSelector(state => state.getProductDetails);
 	const { loading, error, product } = productDetails;
 
+	const loggedUser = useSelector(state => state.getLoggedUser.loggedUser);
+
 	useEffect(
 		() => {
-			dispatch(getProductDetails(props.match.params.id));
+			dispatch(getProductDetails(match.params.id));
 		},
-		[ dispatch ]
+		[ dispatch, match.params.id ]
 	);
 
 	const addToCartHandler = () => {
-		dispatch(addToCart(product._id, quantity));
-		props.history.push('/cart');
+		if (loggedUser.username !== undefined) {
+			dispatch(addToCart(product._id, quantity, loggedUser));
+			history.push('/cart');
+		}
+		else {
+			history.push('/login');
+		}
 	};
 
 	return (

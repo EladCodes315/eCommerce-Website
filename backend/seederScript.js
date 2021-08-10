@@ -1,17 +1,24 @@
-require('dotenv').config();
-
-const productsData = require('./data/products');
-const connectDB = require('./configs/database');
+const { default: axios } = require('axios');
 const Product = require('./models/Product');
 
-connectDB();
+require('./configs/database');
 
 const importData = async () => {
 	try {
 		await Product.deleteMany({});
-
-		await Product.insertMany(productsData);
-
+		let productsFromApi = (await axios.get('https://fakestoreapi.com/products')).data;
+		let productsToDB = productsFromApi.map(product => {
+			let newProduct = {
+				name: product.title,
+				price: product.price,
+				description: product.description,
+				category: product.category,
+				imageUrl: product.image,
+				countInStock: Math.floor(Math.random() * (11 - 1) + 1)
+			};
+			return newProduct;
+		});
+		await Product.insertMany(productsToDB);
 		console.log('Data import SUCCEEDED!');
 		process.exit();
 	} catch (error) {

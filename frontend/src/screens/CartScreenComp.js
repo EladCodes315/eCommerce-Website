@@ -1,43 +1,52 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import CartItemComp from '../components/CartItemComp';
 
 import './CartScreenComp.css';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-import { addToCart, removeFromCart } from '../redux/actions/cartActions';
+import { addToCart, removeFromCart, resetCart } from '../redux/actions/accountActions';
+import axios from 'axios';
 
 const CartScreenComp = () => {
 	const dispatch = useDispatch();
 
-	const cart = useSelector(state => state.cart);
-	const { cartItems } = cart;
+	const loggedUser = useSelector(state => state.getLoggedUser.loggedUser);
 
-	const quantityChangeHandler = (id, quantity) => {
-		dispatch(addToCart(id, quantity));
+	const quantityChangeHandler = (productId, quantity) => {
+		dispatch(addToCart(productId, quantity, loggedUser));
 	};
 
-	const removeFromCartHandler = id => {
-		dispatch(removeFromCart(id));
+	const removeFromCartHandler = productId => {
+		dispatch(removeFromCart(productId, loggedUser));
 	};
 
 	const getCartCount = () => {
-		return cartItems.reduce((cartCount, item) => Number(item.quantity) + cartCount, 0);
+		return loggedUser.cart.reduce((cartCount, item) => item.quantity + cartCount, 0);
 	};
 
 	const getCartSubtotal = () => {
-		return cartItems.reduce((subtotal, item) => item.quantity * item.price + subtotal, 0);
+		return loggedUser.cart.reduce((subtotal, item) => item.quantity * item.price + subtotal, 0);
+	};
+
+	const checkoutHandler = async () => {
+		try {
+			let { data } = await axios.post('http://localhost:4000/checkout', loggedUser.cart);
+			dispatch(resetCart(loggedUser));
+			window.location = data.url;
+		} catch (error) {
+			alert(error.message);
+		}
 	};
 
 	return (
 		<div className="cartscreen">
 			<div className="cartscreen-left">
 				<h2> My Cart </h2>
-				{cartItems.length === 0 ? (
+				{loggedUser.cart.length === 0 ? (
 					<div> Your Cart is Empty! </div>
 				) : (
-					cartItems.map((item, index) => (
+					loggedUser.cart.map((item, index) => (
 						<CartItemComp
 							key={index}
 							item={item}
@@ -52,7 +61,7 @@ const CartScreenComp = () => {
 					<p> Subtotal ({getCartCount()}) items</p>
 					<p> ₪{getCartSubtotal().toFixed(2)} </p>
 					<div>
-						<button>Checkout</button>
+						<button onClick={checkoutHandler}>Checkout</button>
 					</div>
 				</div>
 			</div>

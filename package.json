@@ -14,10 +14,13 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"axios": "^0.21.1",
+		"bcrypt": "^5.0.1",
 		"cors": "^2.8.5",
 		"dotenv": "^10.0.0",
 		"express": "^4.17.1",
-		"mongoose": "^5.13.3"
+		"mongoose": "^5.13.3",
+		"stripe": "^8.168.0"
 	},
 	"devDependencies": {
 		"concurrently": "^6.2.0",
