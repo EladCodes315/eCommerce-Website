@@ -10,10 +10,10 @@ const CartItemComp = ({ item, quantityChangeHandler, removeFromCartHandler }) =>
 			<div className="cartitem-image">
 				<img src={item.imageUrl} alt="" />
 			</div>
-			<Link to={`/products/${item.productId}`} className="cartitem-name">
+			<Link to={`/product/${item.productId}`} className="cartitem-name">
 				<p>{item.name}</p>
 			</Link>
-			<p className="cartitem-price"> ₪{item.price * item.quantity} </p>
+			<p className="cartitem-price"> ${item.price * item.quantity} </p>
 			<select className="cartitem-select" value={item.quantity} onChange={e => quantityChangeHandler(item.productId, e.target.value)}>
 				{[ ...Array(item.countInStock).keys() ].map(x => (
 					<option key={x + 1} value={x + 1}>
@@ -22,7 +22,7 @@ const CartItemComp = ({ item, quantityChangeHandler, removeFromCartHandler }) =>
 				))}
 			</select>
 
-			<button className="cartitem-deletebtn" onClick={e => removeFromCartHandler(item.productId)}>
+			<button className="cartitem-deletebtn" onClick={() => removeFromCartHandler(item.productId)}>
 				<i className="fas fa-trash" />
 			</button>
 		</div>

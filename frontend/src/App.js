@@ -14,6 +14,7 @@ import ProductScreenComp from './screens/ProductScreenComp';
 import CartScreenComp from './screens/CartScreenComp';
 import LoginScreenComp from './screens/LoginScreenComp';
 import RegisterScreenComp from './screens/RegisterScreenComp';
+import ProfileScreenComp from './screens/ProfileScreenComp';
 
 function App(){
 	const [ sideToggle, setSideToggle ] = useState(false);
@@ -41,6 +42,8 @@ function App(){
 					<Route exact path="/login" component={LoginScreenComp} />
 					{/* The Register Screen */}
 					<Route exact path="/register" component={RegisterScreenComp} />
+					{/* The Profile Screen */}
+					<Route path="/profile" component={ProfileScreenComp} />
 				</Switch>
 			</main>
 		</BrowserRouter>

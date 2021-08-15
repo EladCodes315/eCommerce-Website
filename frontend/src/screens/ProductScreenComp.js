@@ -24,7 +24,7 @@ const ProductScreenComp = ({ match, history }) => {
 	);
 
 	const addToCartHandler = () => {
-		if (loggedUser.username !== undefined) {
+		if (loggedUser.username) {
 			dispatch(addToCart(product._id, quantity, loggedUser));
 			history.push('/cart');
 		}
@@ -47,14 +47,19 @@ const ProductScreenComp = ({ match, history }) => {
 						</div>
 						<div className="left-info">
 							<p className="left-name">{product.name}</p>
-							<p>₪{product.price}</p>
-							<p>Descripstion: {product.description}</p>
+							<p>${product.price}</p>
+							<p>
+								<b>Descripstion</b>: {product.description}
+							</p>
+							<p>
+								<b>Category</b>: {product.category}
+							</p>
 						</div>
 					</div>
 					<div className="productscreen-right">
 						<div className="right-info">
 							<p>
-								Price: <span>₪{product.price * quantity}</span>
+								Price: <span>${product.price * quantity}</span>
 							</p>
 							<p>
 								Status: <span> {product.countInStock > 0 ? 'In Stock!' : 'Out of Stock!'} </span>

@@ -22,11 +22,11 @@ const CartScreenComp = () => {
 	};
 
 	const getCartCount = () => {
-		return loggedUser.cart.reduce((cartCount, item) => item.quantity + cartCount, 0);
+		return loggedUser.cart ? loggedUser.cart.reduce((cartCount, item) => item.quantity + cartCount, 0) : 0;
 	};
 
 	const getCartSubtotal = () => {
-		return loggedUser.cart.reduce((subtotal, item) => item.quantity * item.price + subtotal, 0);
+		return loggedUser.cart ? loggedUser.cart.reduce((subtotal, item) => item.quantity * item.price + subtotal, 0) : 0;
 	};
 
 	const checkoutHandler = async () => {
@@ -43,7 +43,7 @@ const CartScreenComp = () => {
 		<div className="cartscreen">
 			<div className="cartscreen-left">
 				<h2> My Cart </h2>
-				{loggedUser.cart.length === 0 ? (
+				{!loggedUser.cart || loggedUser.cart.length === 0 ? (
 					<div> Your Cart is Empty! </div>
 				) : (
 					loggedUser.cart.map((item, index) => (
@@ -59,7 +59,7 @@ const CartScreenComp = () => {
 			<div className="cartscreen-right">
 				<div className="cartscreen-info">
 					<p> Subtotal ({getCartCount()}) items</p>
-					<p> ₪{getCartSubtotal().toFixed(2)} </p>
+					<p> ${getCartSubtotal().toFixed(2)} </p>
 					<div>
 						<button onClick={checkoutHandler}>Checkout</button>
 					</div>

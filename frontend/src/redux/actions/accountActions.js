@@ -4,11 +4,8 @@ import axios from 'axios';
 export const addAccount = account => async dispatch => {
 	try {
 		dispatch({ type: actionTypes.POST_ACCOUNT_REQUEST });
-		let { data } = await axios.post('http://localhost:4000/accounts/', account);
-		dispatch({
-			type: actionTypes.POST_ACCOUNT_SUCCESS,
-			payload: data
-		});
+		await axios.post('http://localhost:4000/accounts', { ...account });
+		dispatch({ type: actionTypes.POST_ACCOUNT_SUCCESS });
 	} catch (error) {
 		dispatch({
 			type: actionTypes.POST_ACCOUNT_FAIL,
@@ -53,7 +50,7 @@ export const addToCart = (productId, quantity, account) => async (dispatch, getS
 			];
 		}
 
-		await axios.put(`http://localhost:4000/accounts/${account._id}`, newCart);
+		await axios.put(`http://localhost:4000/accounts/${account._id}/accountcart`, newCart);
 		dispatch({
 			type: actionTypes.ADD_TO_CART_SUCCESS,
 			payload: newCart
@@ -74,7 +71,7 @@ export const removeFromCart = (productId, account) => async (dispatch, getState)
 
 		let newCart = [ ...account.cart.filter(product => product.productId !== productId) ];
 
-		await axios.put(`http://localhost:4000/accounts/${account._id}`, newCart);
+		await axios.put(`http://localhost:4000/accounts/${account._id}/accountcart`, newCart);
 		dispatch({
 			type: actionTypes.REMOVE_FROM_CART_SUCCESS,
 			payload: newCart
@@ -93,7 +90,7 @@ export const resetCart = account => async (dispatch, getState) => {
 	try {
 		dispatch({ type: actionTypes.RESET_CART_REQUEST });
 
-		await axios.put(`http://localhost:4000/accounts/${account._id}`, []);
+		await axios.put(`http://localhost:4000/accounts/${account._id}/accountcart`, []);
 		dispatch({ type: actionTypes.RESET_CART_SUCCESS });
 
 		localStorage.setItem('loggedUser', JSON.stringify(getState().getLoggedUser.loggedUser));

@@ -5,19 +5,19 @@ export const getLoggedUserReducer = (state = { loggedUser: {} }, action) => {
 		case actionTypes.POST_ACCOUNT_REQUEST: {
 			return {
 				loading: true,
-				loggedUser: { ...state.loggedUser }
+				loggedUser: {}
 			};
 		}
 		case actionTypes.POST_ACCOUNT_SUCCESS: {
 			return {
 				loading: false,
-				loggedUser: { ...state.loggedUser }
+				loggedUser: {}
 			};
 		}
 		case actionTypes.POST_ACCOUNT_FAIL: {
 			return {
 				loading: false,
-				loggedUser: { ...state.loggedUser },
+				loggedUser: {},
 				error: action.payload
 			};
 		}
@@ -90,6 +90,31 @@ export const getLoggedUserReducer = (state = { loggedUser: {} }, action) => {
 				loading: false,
 				loggedUser: { ...state.loggedUser },
 				error: action.payload
+			};
+		}
+		case actionTypes.CHANGE_ACCOUNT_USERNAME: {
+			return {
+				loggedUser: { ...state.loggedUser, username: action.payload }
+			};
+		}
+		case actionTypes.CHANGE_ACCOUNT_PASSWORD: {
+			return {
+				loggedUser: { ...state.loggedUser, password: action.payload }
+			};
+		}
+		case actionTypes.CHANGE_ACCOUNT_FULLNAME: {
+			return {
+				loggedUser: { ...state.loggedUser, fullname: action.payload }
+			};
+		}
+		case actionTypes.CHANGE_ACCOUNT_EMAIL: {
+			return {
+				loggedUser: { ...state.loggedUser, email: action.payload }
+			};
+		}
+		case actionTypes.CHANGE_ACCOUNT_BIRTHDATE: {
+			return {
+				loggedUser: { ...state.loggedUser, dateOfBirth: action.payload }
 			};
 		}
 		default: {

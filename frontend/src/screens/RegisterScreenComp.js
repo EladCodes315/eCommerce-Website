@@ -9,6 +9,9 @@ import { addAccount } from '../redux/actions/accountActions';
 const RegisterScreenComp = ({ history }) => {
 	const [ username, setUsername ] = useState('');
 	const [ password, setPassword ] = useState('');
+	const [ fullname, setFullname ] = useState('');
+	const [ email, setEmail ] = useState('');
+	const [ dateOfBirth, setDateOfBirth ] = useState(new Date());
 
 	const dispatch = useDispatch();
 
@@ -16,7 +19,10 @@ const RegisterScreenComp = ({ history }) => {
 		try {
 			let account = {
 				username,
-				password
+				password,
+				fullname,
+				email,
+				dateOfBirth
 			};
 			dispatch(addAccount(account));
 			history.push('/login');
@@ -34,6 +40,12 @@ const RegisterScreenComp = ({ history }) => {
 				<input type="text" onChange={e => setUsername(e.target.value)} />
 				<label className="register-labels">Password</label>
 				<input type="password" onChange={e => setPassword(e.target.value)} />
+				<label className="register-labels">Full Name</label>
+				<input type="text" onChange={e => setFullname(e.target.value)} />
+				<label className="register-labels">Email</label>
+				<input type="email" onChange={e => setEmail(e.target.value)} />
+				<label className="register-labels">Birthdate</label>
+				<input type="date" onChange={e => setDateOfBirth(e.target.value)} />
 				<button className="register-btn" onClick={registerFunc}>
 					Sign Up
 				</button>

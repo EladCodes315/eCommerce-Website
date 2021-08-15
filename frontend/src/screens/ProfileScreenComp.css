@@ -1,0 +1,54 @@
+.profilescreen {
+	max-width: 500px;
+	margin: 1rem auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.profilescreen > h2 {
+	display: block;
+	margin: 0 auto;
+}
+
+.profile-info {
+	justify-content: center;
+}
+
+.profile-info-paragraphs {
+	margin: 4rem;
+}
+
+.profile-changeBtns {
+	grid-column: 1/-1;
+	width: 75%;
+	padding: 10px 16px;
+	margin-top: 20px;
+	background: #171717;
+	color: #f4f4f4;
+	border: 1px solid #171717;
+	cursor: pointer;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-weight: bold;
+}
+
+.profile-changeBtns:hover {
+	opacity: 0.5;
+}
+
+.profile-backBtns {
+	grid-column: 1/-1;
+	width: 75%;
+	padding: 10px 16px;
+	margin-top: 20px;
+	background: #171717;
+	color: #f4f4f4;
+	border: 1px solid #171717;
+	cursor: pointer;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-weight: bold;
+}
+
+.profile-backBtns:hover {
+	opacity: 0.5;
+}

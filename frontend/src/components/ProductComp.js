@@ -14,7 +14,7 @@ const ProductComp = props => {
 
 				<p className="product-description">{props.product.description}</p>
 
-				<p className="product-price">₪{props.product.price}</p>
+				<p className="product-price">${props.product.price}</p>
 
 				<Link to={`/product/${props.product._id}`} className="product-button">
 					View

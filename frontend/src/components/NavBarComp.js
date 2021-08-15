@@ -32,13 +32,13 @@ const NavBarComp = ({ click }) => {
 			</div>
 
 			<ul className="navbar-links">
-				<li>
+				<li style={{ display: loggedUser.username ? 'flex' : 'none' }}>
 					{' '}
 					<Link to="/profile">
 						<i className="fas fa-user-circle" style={{ color: '#f4f4f4', fontSize: '30px', marginTop: '10px', cursor: 'pointer' }} />
 					</Link>
 				</li>
-				<li>
+				<li style={{ display: loggedUser.username ? 'flex' : 'none' }}>
 					<Link to="/cart" className="navbar-links">
 						<div className="cart-link">
 							{/* Cart counter */}
